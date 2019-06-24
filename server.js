@@ -19,7 +19,7 @@ app.get('/', async function(req, res) {
   var head_loaded = false
   //res.write('<i></i>'.repeat(1000)) // firefox
   let y = await (await fetch('https://www.yyyyyyy.info/')).text()
-  let yy = y.match(/.{1,20}/g);
+  let yy = y.match(/.{1,10}/g);
   for(x of yy) {
     if(x.includes('</head')){head_loaded=true}
     res.write(x);
