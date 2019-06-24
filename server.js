@@ -17,13 +17,13 @@ app.use('/s',express.static('public'));
 app.get('/', async function(req, res) {
   _send_heading(req,res)
   var head_loaded = false
-  res.write('<style>img{display:none;}body{background-image:none!important;}</style><script>setInterval(function(){window.scrollTo(0,document.body.scrollHeight);},1000)</script>')
+  res.write('<style>img{display:none;}body{background-image:none!important;background:black;color:white}</style><script>setInterval(function(){window.scrollTo(0,document.body.scrollHeight);},1000)</script>')
   let y = await (await fetch('https://www.yyyyyyy.info/')).text()
   let yy = y.match(/.{1,10}/g);
   for(x of yy) {
     if(!head_loaded && (x.includes('</head') || x.includes('<img') || x.includes('<body'))){head_loaded=true}
     res.write(x);
-    if(head_loaded){await sleep(Math.floor(Math.random()*400))}
+    if(head_loaded){await sleep(Math.floor(Math.random()*350))}
   }
 });
 
