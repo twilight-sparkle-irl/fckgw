@@ -16,6 +16,7 @@ app.use('/s',express.static('public'));
 app.get('/', function(req, res) {
   _send_heading(req,res)
   res.write('hi<br />');
+  res.write('\u200b'.repeat(1000))
   for (var i = 0; i < 10; i++) {
     setTimeout(function(){res.write(`huh? ${i}<br />`);},i*500)
   }
