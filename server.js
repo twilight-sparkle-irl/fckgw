@@ -17,13 +17,13 @@ app.use('/s',express.static('public'));
 app.get('/', async function(req, res) {
   _send_heading(req,res)
 
-  res.write('<i></i>'.repeat(1000)) // firefox
+  //res.write('<i></i>'.repeat(1000)) // firefox
   let y = await (await fetch('https://www.yyyyyyy.info/')).text()
   let yy = y.match(/.{1,20}/g);
-  yy.forEach(async function(x,i){
+  for(x of yy) {
     res.write(x);
     await sleep(Math.floor(Math.random()*3000))
-  })
+  }
 });
 
 function _send_heading(req,res) { 
