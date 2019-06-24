@@ -19,6 +19,7 @@ app.get('/', async function(req, res) {
   for (var i = 0; i < 10; i++) {
     await sleep(500)
     res.write(`huh? ${i}<br />`);
+    if(i%2==0)res.flush() 
   }
   res.write('thanks!')
   res.end()
