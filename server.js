@@ -16,13 +16,14 @@ app.use('/s',express.static('public'));
 // http://expressjs.com/en/starter/basic-routing.html
 app.get('/', async function(req, res) {
   _send_heading(req,res)
-
+  var head_loaded = false
   //res.write('<i></i>'.repeat(1000)) // firefox
   let y = await (await fetch('https://www.yyyyyyy.info/')).text()
   let yy = y.match(/.{1,20}/g);
   for(x of yy) {
+    if(x.includes('</head')){head_loaded=true}
     res.write(x);
-    await sleep(Math.floor(Math.random()*600))
+    if(head_loaded){await sleep(Math.floor(Math.random()*600))}
   }
 });
 
