@@ -22,7 +22,7 @@ app.get('/', async function(req, res) {
   let yy = y.match(/.{1,20}/g);
   yy.forEach(async function(x,i){
     res.write(x);
-    await sleep(Math.floor(Math.random()*600))
+    await sleep(Math.floor(Math.random()*3000))
   })
 });
 
