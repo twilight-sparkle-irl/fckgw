@@ -13,16 +13,13 @@ const {sleep} = require('./util');
 app.use('/s',express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get('/', async function(req, res) {
+app.get('/', function(req, res) {
   _send_heading(req,res)
   res.write('hi<br />');
   for (var i = 0; i < 10; i++) {
-    await sleep(500)
-    res.write(`huh? ${i}<br />`);
-    if(i%2==0)res.flush() 
+    setInterval(function(){res.write(`huh? ${i}<br />`);},i*500)
   }
-  res.write('thanks!')
-  res.end()
+  setInterval(function(){res.write('thanks!');res.end();},11*500)
 });
 
 function _send_heading(req,res) { 
