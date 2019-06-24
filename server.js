@@ -21,9 +21,9 @@ app.get('/', async function(req, res) {
   let y = await (await fetch('https://www.yyyyyyy.info/')).text()
   let yy = y.match(/.{1,10}/g);
   for(x of yy) {
-    if(x.includes('</head')){head_loaded=true}
+    if(!head_loaded && (x.includes('</head') || x.includes('<img') || x.includes('<body'))){head_loaded=true}
     res.write(x);
-    if(head_loaded){await sleep(Math.floor(Math.random()*600))}
+    if(head_loaded){await sleep(Math.floor(Math.random()*400))}
   }
 });
 
