@@ -11,7 +11,7 @@ const {sleep} = require('./util');
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
 // http://expressjs.com/en/starter/static-files.html
-app.use('/s',express.static('public'));
+app.use('/s',express.static('static'));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get('/', async function(req, res) {
@@ -22,7 +22,7 @@ app.get('/', async function(req, res) {
   let yy = y.match(/.{1,10}/g);
   for(x of yy) {
     if(!head_loaded && (x.includes('</head') || x.includes('<img') || x.includes('<body'))){head_loaded=true}
-    res.write(x);
+    [...x].forEach(x=>res.write(x));
     if(head_loaded){await sleep(Math.floor(Math.random()*350))}
   }
 });
