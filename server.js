@@ -16,7 +16,7 @@ app.use('/s',express.static('public'));
 app.get('/', function(req, res) {
   _send_heading(req,res)
   res.write('hi<br />');
-  res.write('\u200b'.repeat(1000))
+  res.write('<i></i>'.repeat(1000))
   for (var i = 0; i < 10; i++) {
     setTimeout(function(){res.write(`huh? ${i}<br />`);},i*500)
   }
@@ -25,7 +25,7 @@ app.get('/', function(req, res) {
 
 function _send_heading(req,res) { 
   res.writeHead(200, { 
-    "Content-Type": "text/html",
+    "Content-Type": "text/html; charset=utf8",
     "Cache-control": "no-cache", 
     "Connection": "keep-alive", 
     "transfer-encoding": "chunked"
