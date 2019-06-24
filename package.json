@@ -1,0 +1,21 @@
+{
+  "name": "fckgw",
+  "version": "4.2.0",
+  "description": "???".
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "express"
+  ]
+}
+
