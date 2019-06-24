@@ -17,7 +17,7 @@ app.use('/s',express.static('public'));
 app.get('/', async function(req, res) {
   _send_heading(req,res)
   var head_loaded = false
-  //res.write('<i></i>'.repeat(1000)) // firefox
+  res.write('<script>setInterval(function(){window.scrollTo(0,document.body.scrollHeight);},1000)</script>')
   let y = await (await fetch('https://www.yyyyyyy.info/')).text()
   let yy = y.match(/.{1,10}/g);
   for(x of yy) {
