@@ -3,6 +3,7 @@
 
 // init project
 const express = require('express');
+const fetch = require('node-fetch')
 const app = express();
 const {sleep} = require('./util');
 
@@ -13,14 +14,16 @@ const {sleep} = require('./util');
 app.use('/s',express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get('/', function(req, res) {
+app.get('/', async function(req, res) {
   _send_heading(req,res)
-  res.write('hi<br />');
-  res.write('<i></i>'.repeat(1000))
-  for (var i = 0; i < 10; i++) {
-    setTimeout(function(){res.write(`huh? ${i}<br />`);},i*500)
-  }
-  setTimeout(function(){res.write('thanks!');res.end();},11*500)
+
+  res.write('<i></i>'.repeat(1000)) // firefox
+  let y = await (await fetch('https://www.yyyyyyy.info/')).text()
+  let yy = y.match(/.{1,20}/g);
+  yy.forEach(async function(x,i){
+    res.write(x);
+    await sleep(Math.floor(Math.random()*600))
+  })
 });
 
 function _send_heading(req,res) { 
@@ -30,11 +33,10 @@ function _send_heading(req,res) {
     "Connection": "keep-alive", 
     "transfer-encoding": "chunked"
   });
-  res.write('<!doctype html><html><head><title>streamy</title><link rel="stylesheet" type="text/css" href="/s/style.css"></head><body>')
+  //res.write('<!doctype html><html><head><title>streamy</title><link rel="stylesheet" type="text/css" href="/s/style.css"></head><body>')
 }
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
 });
-
