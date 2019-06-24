@@ -17,9 +17,9 @@ app.get('/', function(req, res) {
   _send_heading(req,res)
   res.write('hi<br />');
   for (var i = 0; i < 10; i++) {
-    setInterval(function(){res.write(`huh? ${i}<br />`);},i*500)
+    setTimeout(function(){res.write(`huh? ${i}<br />`);},i*500)
   }
-  setInterval(function(){res.write('thanks!');res.end();},11*500)
+  setTimeout(function(){res.write('thanks!');res.end();},11*500)
 });
 
 function _send_heading(req,res) { 
