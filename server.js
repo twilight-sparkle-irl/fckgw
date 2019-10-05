@@ -32,7 +32,7 @@ app.get('/', async function(req, res) {
   var head_loaded = false
   res.write(header)
   let yy = await (await fetch('https://www.yyyyyyy.info/')).text()
-  let yychunks = y.match(/.{1,10}/g);
+  let yychunks = yy.match(/.{1,10}/g);
   for(x of yychunks) {
     if(!head_loaded && (x.includes('</head') || x.includes('<img') || x.includes('<body'))){head_loaded=true}
     [...x].forEach(x=>res.write(x));
