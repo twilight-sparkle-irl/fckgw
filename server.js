@@ -19,6 +19,7 @@ const header = `<style>
         background: black;
         color: white
     }
+    * { animation: none !important; }
 </style>
 <script>
     setInterval(function() {
