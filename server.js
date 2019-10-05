@@ -7,34 +7,46 @@ const fetch = require('node-fetch')
 const app = express();
 const {sleep} = require('./util');
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+// header that makes the random images and background images not display
+// as well as scrolling the page down automatically
+const header = `<style>
+    img {
+        display: none;
+    }
 
-// http://expressjs.com/en/starter/static-files.html
-app.use('/s',express.static('static'));
+    body {
+        background-image: none !important;
+        background: black;
+        color: white
+    }
+</style>
+<script>
+    setInterval(function() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }, 1000)
+</script>
+`
 
-// http://expressjs.com/en/starter/basic-routing.html
 app.get('/', async function(req, res) {
   _send_heading(req,res)
   var head_loaded = false
-  res.write('<style>img{display:none;}body{background-image:none!important;background:black;color:white}</style><script>setInterval(function(){window.scrollTo(0,document.body.scrollHeight);},1000)</script>')
-  let y = await (await fetch('https://www.yyyyyyy.info/')).text()
-  let yy = y.match(/.{1,10}/g);
-  for(x of yy) {
+  res.write(header)
+  let yy = await (await fetch('https://www.yyyyyyy.info/')).text()
+  let yychunks = y.match(/.{1,10}/g);
+  for(x of yychunks) {
     if(!head_loaded && (x.includes('</head') || x.includes('<img') || x.includes('<body'))){head_loaded=true}
     [...x].forEach(x=>res.write(x));
     if(head_loaded){await sleep(Math.floor(Math.random()*350))}
   }
 });
 
-function _send_heading(req,res) { 
-  res.writeHead(200, { 
+function _send_heading(req,res) {
+  res.writeHead(200, {
     "Content-Type": "text/html; charset=utf8",
-    "Cache-control": "no-cache", 
-    "Connection": "keep-alive", 
+    "Cache-control": "no-cache",
+    "Connection": "keep-alive",
     "transfer-encoding": "chunked"
   });
-  //res.write('<!doctype html><html><head><title>streamy</title><link rel="stylesheet" type="text/css" href="/s/style.css"></head><body>')
 }
 
 // listen for requests :)
